@@ -4,20 +4,20 @@ import '../../navbar/views/navbar_view.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
-  const HomeView({super.key});
+  HomeView({super.key});
 
   @override
+  final HomeController controller = Get.put(HomeController());
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView( // Membungkus dengan SingleChildScrollView
+      body: SingleChildScrollView(
         child: Column(
           children: [
-            // Background atas dengan gambar
             Container(
               height: 270,
               decoration: const BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage('assets/bg_home.png'), // Path gambar Anda
+                  image: AssetImage('assets/bg_home.png'),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -26,42 +26,42 @@ class HomeView extends GetView<HomeController> {
                 children: [
                   AppBar(
                     backgroundColor: Colors.black.withOpacity(0.5),
-                    title: Row(
-                      children: [
-                        Container(
-                          width: 180,
-                          child: TextField(
-                            decoration: InputDecoration(
-                              isDense: true,
-                              prefixIcon: const Icon(Icons.search),
-                              hintText: 'Search...',
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: BorderSide.none,
-                              ),
-                              filled: true,
-                              fillColor: Colors.white,
-                              contentPadding: const EdgeInsets.symmetric(
-                                  vertical: 4, horizontal: 8),
-                            ),
+                    title: Container(
+                      height: 40,
+                      width: MediaQuery.of(context).size.width * 1,
+                      child: TextField(
+                        onChanged: (query) => controller.updateSearchQuery(query),
+                        style: const TextStyle(color: Colors.black),
+                        decoration: InputDecoration(
+                          prefixIcon: const Icon(Icons.search),
+                          hintText: 'Search...',
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: BorderSide.none,
                           ),
+                          filled: true,
+                          fillColor: Colors.white,
+                          contentPadding: const EdgeInsets.symmetric(
+                              vertical: 4, horizontal: 8),
                         ),
-                        IconButton(
-                          icon: const Icon(Icons.notifications,
-                              color: Colors.white),
-                          onPressed: () {},
-                        ),
-                        IconButton(
-                          icon: const Icon(Icons.shopping_cart,
-                              color: Colors.white),
-                          onPressed: () {},
-                        ),
-                        IconButton(
-                          icon: const Icon(Icons.person, color: Colors.white),
-                          onPressed: () {},
-                        ),
-                      ],
+                      ),
                     ),
+                    actions: [
+                      IconButton(
+                        icon: const Icon(Icons.notifications,
+                            color: Colors.white),
+                        onPressed: () {},
+                      ),
+                      IconButton(
+                        icon: const Icon(Icons.shopping_cart,
+                            color: Colors.white),
+                        onPressed: () {},
+                      ),
+                      IconButton(
+                        icon: const Icon(Icons.person, color: Colors.white),
+                        onPressed: () {},
+                      ),
+                    ],
                   ),
                   const Padding(
                     padding: EdgeInsets.only(left: 16, top: 16),
@@ -83,7 +83,7 @@ class HomeView extends GetView<HomeController> {
                           color: Colors.white),
                     ),
                   ),
-                  const SizedBox(height: 16), // Spasi antara teks dan tombol
+                  const SizedBox(height: 16),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     child: Container(
@@ -127,7 +127,8 @@ class HomeView extends GetView<HomeController> {
                               Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Icon(Icons.edit, color: Colors.white, size: 16),
+                                  Icon(Icons.edit,
+                                      color: Colors.white, size: 16),
                                   SizedBox(width: 4),
                                   Text("Status Produk",
                                       style: TextStyle(
@@ -138,7 +139,8 @@ class HomeView extends GetView<HomeController> {
                               Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Icon(Icons.sell, color: Colors.white, size: 16),
+                                  Icon(Icons.sell,
+                                      color: Colors.white, size: 16),
                                   SizedBox(width: 4),
                                   Text("Penjualan",
                                       style: TextStyle(
@@ -166,9 +168,8 @@ class HomeView extends GetView<HomeController> {
                 ],
               ),
             ),
-            // Grid untuk slider
             Container(
-              height: 150, // Atur tinggi sesuai kebutuhan Anda
+              height: 150,
               child: PageView.builder(
                 itemCount: 3,
                 onPageChanged: (index) {
@@ -176,8 +177,8 @@ class HomeView extends GetView<HomeController> {
                 },
                 itemBuilder: (context, index) {
                   return Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 16, vertical: 8),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                     child: Container(
                       decoration: BoxDecoration(
                         color: Colors.blueGrey[700],
@@ -205,14 +206,13 @@ class HomeView extends GetView<HomeController> {
                 },
               ),
             ),
-            // Indicator bar
             Obx(() {
               return Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: List.generate(3, (index) {
                   return Container(
-                    margin: const EdgeInsets.symmetric(
-                        horizontal: 4, vertical: 8),
+                    margin:
+                        const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
                     width: 8,
                     height: 8,
                     decoration: BoxDecoration(
@@ -225,9 +225,8 @@ class HomeView extends GetView<HomeController> {
                 }),
               );
             }),
-            // Baris untuk Kategori Produk
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 0), // Menghapus padding vertikal
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -254,7 +253,6 @@ class HomeView extends GetView<HomeController> {
                 ],
               ),
             ),
-            // Grid untuk kategori produk
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: GridView.count(

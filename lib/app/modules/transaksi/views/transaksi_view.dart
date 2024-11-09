@@ -6,7 +6,7 @@ import 'package:gizmogate/app/modules/transaksi/controllers/transaksi_controller
 import '../../navbar/views/navbar_view.dart';
 
 class TransaksiView extends GetView<TransaksiController> {
-  const TransaksiView({super.key});
+  TransaksiView({super.key});
   @override
   Widget build(BuildContext context) {
     final TransaksiController controller = Get.put(TransaksiController());
